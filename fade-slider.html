@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Fade-slider</title>
+  <style>
+    .slider {
+      position: relative;
+      height: 350px;
+      width: 350px;
+      margin-bottom: 20px;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: none;
+    }
+
+    .slide__next, .slide__prev {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 0 1rem 0;
+      font-family: inherit;
+      padding: 0.85em 1em;
+      -webkit-appearance: none;
+      border: 1px solid transparent;
+      border-radius: 0;
+      -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+      transition: background-color 0.25s ease-out, color 0.25s ease-out;
+      font-size: 0.9rem;
+      line-height: 1;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      background-color: #1779ba;
+      color: #fefefe;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="slider">
+      <img class="slide" src="http://via.placeholder.com/350/ffffff/ffeb3b"></img>
+      <img class="slide" src="http://via.placeholder.com/350/673ab7/000000"></img>
+      <img class="slide" src="http://via.placeholder.com/350/f44336/00bcd4"></img>
+      <img class="slide slide--current" src="http://via.placeholder.com/350/ffeb3b/000000" style="display: block;"></img>
+      <img class="slide" src="http://via.placeholder.com/350/ffffff/673ab7"></img>
+      <img class="slide" src="http://via.placeholder.com/350/000000/f44336"></img>
+      <img class="slide" src="http://via.placeholder.com/350/00bcd4/000000"></img>
+      <img class="slide" src="http://via.placeholder.com/350/673ab7/ffeb3b"></img>
+    </div>
+    <button class="slide__prev">Prev</button>
+    <button class="slide__next">Next</button>
+  </div>
+
+  <script src="jquery-3.2.1.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.slide__next').on('click', function() {
+        $('.slide__prev').show();
+        let totalIndex = $('.slide').length;
+        let nextIndex = $('.slide--current').index();
+        if ( nextIndex == totalIndex - 2 ) {
+          $('.slide--current').removeClass('slide--current').fadeOut().next().addClass('slide--current').fadeIn();
+          $('.slide__next').hide();
+
+        } else {
+          $('.slide--current').removeClass('slide--current').fadeOut().next().addClass('slide--current').fadeIn();
+        }
+      });
+
+      $('.slide__prev').on('click', function() {
+        $('.slide__next').show();
+        let btnIndex = $('.slide--current').index();
+        if (btnIndex == 1) {
+          $('.slide--current').removeClass('slide--current').fadeOut().prev().addClass('slide--current').fadeIn();
+          $('.slide__prev').hide();
+        } else {
+          $('.slide--current').removeClass('slide--current').fadeOut().prev().addClass('slide--current').fadeIn();
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>
